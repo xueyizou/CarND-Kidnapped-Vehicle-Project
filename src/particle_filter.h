@@ -1,4 +1,4 @@
-/*
+﻿/*
  * particle_filter.h
  *
  * 2D particle filter class.
@@ -25,10 +25,8 @@ struct Particle {
 class ParticleFilter {
 	
 	// Number of particles to draw
-	int num_particles; 
-	
-	
-	
+    int num_particles;
+
 	// Flag, if filter is initialized
 	bool is_initialized;
 	
@@ -81,13 +79,13 @@ public:
 	 * updateWeights Updates the weights for each particle based on the likelihood of the 
 	 *   observed measurements. 
 	 * @param sensor_range Range [m] of sensor
-	 * @param std_landmark[] Array of dimension 2 [standard deviation of range [m],
-	 *   standard deviation of bearing [rad]]
+     * @param std_landmark[] Array of dimension 2 [standard x deviation [m],
+     *   standard y deviation [m]]
 	 * @param observations Vector of landmark observations
 	 * @param map Map class containing map landmarks
 	 */
 	void updateWeights(double sensor_range, double std_landmark[], std::vector<LandmarkObs> observations,
-			Map map_landmarks);
+			Map map);
 	
 	/**
 	 * resample Resamples from the updated set of particles to form

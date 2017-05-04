@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 2.8.11)
+﻿cmake_minimum_required(VERSION 2.8.11)
 project(PARTICLE_FILTER)
 
+FILE(GLOB_RECURSE LibFiles src/*)
+add_custom_target(headers SOURCES ${LibFiles})
 
 # Build the particle filter project and solution.
 # Use C++11
