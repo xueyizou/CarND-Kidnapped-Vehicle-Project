@@ -110,22 +110,21 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
             lmk_obs_pred.x = (lmk_x -x)*cos(theta) + (lmk_y -y)*sin(theta);
             lmk_obs_pred.y = -(lmk_x -x)*sin(theta) + (lmk_y -y)*cos(theta);
 
-            observations_pred.push_back(lmk_obs_pred);
+            if(lmk_obs_pred.x*lmk_obs_pred.x + lmk_obs_pred.y*lmk_obs_pred.y<= sensor_range*sensor_range)
+            {
+                observations_pred.push_back(lmk_obs_pred);
+            }
 
         }
 
         for(int k=0; k<num_landmarkObs; ++k)
         {
              LandmarkObs lmk_obs = observations[k];
-             if(lmk_obs.x*lmk_obs.x + lmk_obs.y*lmk_obs.y > sensor_range*sensor_range)
-             {
-                 continue;
-             }
 
              double min_dist=99999;
              double matched_lmk_idx=0;
 
-             for(int l=0; l<num_landmarks; ++l)
+             for(int l=0; l<observations_pred.size(); ++l)
              {
                  LandmarkObs lmk_obs_pred = observations_pred[l];
                  double distance = dist(lmk_obs.x, lmk_obs.y, lmk_obs_pred.x, lmk_obs_pred.y);
